@@ -41,8 +41,6 @@ namespace VaccinationCentres
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
