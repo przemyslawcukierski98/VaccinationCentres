@@ -12,9 +12,6 @@ namespace VaccinationCentres.Models
         {
 
         }
-
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<VaccinationCentre> VaccinationCentres { get; set; }
-        public DbSet<Vaccinator> Vaccinators { get; set; }
     }
 }
