@@ -17,7 +17,14 @@ namespace VaccinationCentres.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet("{id}")]
+        public VaccinationCentre Get(int id)
+            => _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
+
+        [HttpGet]
         public IQueryable<VaccinationCentre> GetAll()
             => _dbContext.VaccinationCentres.Where(x => true);
+
+
     }
 }
