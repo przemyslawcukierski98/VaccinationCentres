@@ -32,6 +32,7 @@ namespace VaccinationCentres
             options.UseSqlServer(Configuration.GetConnectionString("VaccinationCentresDatabase")));
             services.AddControllers();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAutoMapper(this.GetType().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
