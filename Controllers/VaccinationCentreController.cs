@@ -18,13 +18,22 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpGet("{id}")]
-        public VaccinationCentre Get(int id)
-            => _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
+        public ActionResult<VaccinationCentre> Get([FromRoute]int id)
+        {
+            var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
+
+            if(vaccinationCentre is null)
+            {
+                return NotFound();
+            }
+            return Ok(vaccinationCentre);
+        }
 
         [HttpGet]
-        public IQueryable<VaccinationCentre> GetAll()
-            => _dbContext.VaccinationCentres.Where(x => true);
-
-
+        public ActionResult<VaccinationCentre> GetAll()
+        {
+            var vaccinationCentres = _dbContext.VaccinationCentres.Where(x => true);
+            return Ok(vaccinationCentres);
+        }
     }
 }
