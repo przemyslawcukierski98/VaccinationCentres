@@ -40,13 +40,22 @@ namespace VaccinationCentres.Controllers
             return Ok(vaccinationCentres);
         }
 
-        [Route("getShort/{id}")]
+        [Route("getAddress/{id}")]
         [HttpGet]
-        public ActionResult<VaccinationCentre> GetShort([FromRoute] int id)
+        public ActionResult<VaccinationCentre> GetInfoAboutAddress([FromRoute] int id)
         {
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
             var vaccinationCentreDto = _mapper.Map<VaccinationCentreDto>(vaccinationCentre);
             return Ok(vaccinationCentreDto);
+        }
+
+        [Route("getVaccinator/{id}")]
+        [HttpGet]
+        public ActionResult<VaccinationCentre> GetInfoAboutVaccinator([FromRoute] int id)
+        {
+            var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
+            var vaccinatorDto = _mapper.Map<VaccinatorDto>(vaccinationCentre);
+            return Ok(vaccinatorDto);
         }
     }
 }

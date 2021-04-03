@@ -12,6 +12,7 @@ namespace VaccinationCentres.Mapping
         public VaccinationCentresMappingProfile()
         {
             CreateMap<VaccinationCentre, VaccinationCentreDto>();
+            CreateMap<VaccinationCentre, VaccinatorDto>();
         }
     }
 }
