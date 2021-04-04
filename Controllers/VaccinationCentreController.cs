@@ -57,5 +57,13 @@ namespace VaccinationCentres.Controllers
             var vaccinatorDto = _mapper.Map<VaccinatorDto>(vaccinationCentre);
             return Ok(vaccinatorDto);
         }
+
+        [HttpPost]
+        public ActionResult CreateVaccinationCentre([FromBody] VaccinationCentre centre)
+        {
+            _dbContext.VaccinationCentres.Add(centre);
+            _dbContext.SaveChanges();
+            return Created($"/api/vaccinationCentres/{centre.Id}", null);
+        }
     }
 }
