@@ -61,6 +61,10 @@ namespace VaccinationCentres.Controllers
         [HttpPost]
         public ActionResult CreateVaccinationCentre([FromBody] VaccinationCentre centre)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _dbContext.VaccinationCentres.Add(centre);
             _dbContext.SaveChanges();
             return Created($"/api/vaccinationCentres/{centre.Id}", null);
