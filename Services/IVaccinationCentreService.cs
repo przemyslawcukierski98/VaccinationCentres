@@ -5,7 +5,7 @@ namespace VaccinationCentres.Services
 {
     public interface IVaccinationCentreService
     {
-        void Create(VaccinationCentre vaccinationCentre);
+        int Create(VaccinationCentre vaccinationCentre);
         VaccinationCentreDto GetAddressById(int id);
         IEnumerable<VaccinationCentre> GetAll();
         VaccinatorDto GetVaccinatorById(int id);

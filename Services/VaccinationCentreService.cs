@@ -52,10 +52,12 @@ namespace VaccinationCentres.Services
         }
 
 
-        public void Create(VaccinationCentre vaccinationCentre)
+        public int Create(VaccinationCentre vaccinationCentre)
         {
             _dbContext.VaccinationCentres.Add(vaccinationCentre);
             _dbContext.SaveChanges();
+
+            return vaccinationCentre.Id;
 
         }
 
