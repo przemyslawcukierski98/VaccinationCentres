@@ -9,5 +9,7 @@ namespace VaccinationCentres.Services
         VaccinationCentreDto GetAddressById(int id);
         IEnumerable<VaccinationCentre> GetAll();
         VaccinatorDto GetVaccinatorById(int id);
+
+        bool Delete(int id);
     }
 }

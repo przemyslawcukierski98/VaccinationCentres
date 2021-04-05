@@ -51,7 +51,6 @@ namespace VaccinationCentres.Services
             return vaccinationCentres;
         }
 
-
         public int Create(VaccinationCentre vaccinationCentre)
         {
             _dbContext.VaccinationCentres.Add(vaccinationCentre);
@@ -59,6 +58,19 @@ namespace VaccinationCentres.Services
 
             return vaccinationCentre.Id;
 
+        }
+
+        public bool Delete(int id)
+        {
+            var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
+            if(vaccinationCentre is null)
+            {
+                return false;
+            }
+
+            _dbContext.VaccinationCentres.Remove(vaccinationCentre);
+            _dbContext.SaveChanges();
+            return true;
         }
 
     }

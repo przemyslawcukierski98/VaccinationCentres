@@ -66,5 +66,18 @@ namespace VaccinationCentres.Controllers
             var id = _centreService.Create(centre);
             return Created($"/api/vaccinationCentres/{id}", null);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id)
+        {
+            var isDeleted = _centreService.Delete(id);
+
+            if(isDeleted)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
+        }
     }
 }
