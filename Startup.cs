@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VaccinationCentres.Models;
+using VaccinationCentres.Services;
 
 namespace VaccinationCentres
 {
@@ -33,6 +34,7 @@ namespace VaccinationCentres
             services.AddControllers();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(this.GetType().Assembly);
+            services.AddScoped<IVaccinationCentreService, VaccinationCentreService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
