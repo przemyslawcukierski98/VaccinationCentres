@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,18 @@ namespace VaccinationCentres.Services
     {
         private readonly VaccinationCentresContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly ILogger<VaccinationCentreService> _logger;
 
-        public VaccinationCentreService(VaccinationCentresContext dbContext, IMapper mapper)
+        public VaccinationCentreService(VaccinationCentresContext dbContext, IMapper mapper, ILogger<VaccinationCentreService> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public VaccinationCentreDto GetAddressById(int id)
         {
+            _logger.LogInformation($"Vaccination center address with id: {id} GET action invoked");
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
             var vaccinationCentreDto = _mapper.Map<VaccinationCentreDto>(vaccinationCentre);
 
@@ -33,6 +37,7 @@ namespace VaccinationCentres.Services
 
         public VaccinatorDto GetVaccinatorById(int id)
         {
+            _logger.LogInformation($"Vaccinator with id: {id} GET action invoked");
             var vaccinator = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
             var vaccinatorDto = _mapper.Map<VaccinatorDto>(vaccinator);
 
@@ -46,6 +51,7 @@ namespace VaccinationCentres.Services
 
         public IEnumerable<VaccinationCentre> GetAll()
         {
+            _logger.LogInformation("View information of all vaccination centers");
 
             var vaccinationCentres = _dbContext.VaccinationCentres.Where(x => true);
             return vaccinationCentres;
@@ -53,6 +59,7 @@ namespace VaccinationCentres.Services
 
         public int Create(VaccinationCentre vaccinationCentre)
         {
+            _logger.LogInformation($"Vaccination centre with id: {vaccinationCentre.Id} is created");
             _dbContext.VaccinationCentres.Add(vaccinationCentre);
             _dbContext.SaveChanges();
 
@@ -62,6 +69,8 @@ namespace VaccinationCentres.Services
 
         public bool Delete(int id)
         {
+            _logger.LogWarning($"Vaccination centre with id: {id} DELETE action invoked");
+
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
             if(vaccinationCentre is null)
             {
