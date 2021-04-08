@@ -13,5 +13,6 @@ namespace VaccinationCentres.Models
 
         }
         public DbSet<VaccinationCentre> VaccinationCentres { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

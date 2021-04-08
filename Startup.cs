@@ -37,6 +37,7 @@ namespace VaccinationCentres
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IVaccinationCentreService, VaccinationCentreService>();
             services.AddScoped<ErrorHandlingMiddleware>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +51,12 @@ namespace VaccinationCentres
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "VaccinationCentres");
+            });
 
             app.UseRouting();
 
