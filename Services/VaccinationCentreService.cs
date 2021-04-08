@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VaccinationCentres.Exceptions;
 using VaccinationCentres.Models;
 
 namespace VaccinationCentres.Services
@@ -29,7 +30,7 @@ namespace VaccinationCentres.Services
 
             if (vaccinationCentre is null)
             {
-                return null;
+                throw new NotFoundException("Vaccination centre is not found");
             }
 
             return vaccinationCentreDto;
@@ -43,7 +44,7 @@ namespace VaccinationCentres.Services
 
             if (vaccinator is null)
             {
-                return null;
+                throw new NotFoundException("Vaccinator is not found");
             }
 
             return vaccinatorDto;
@@ -67,19 +68,18 @@ namespace VaccinationCentres.Services
 
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             _logger.LogWarning($"Vaccination centre with id: {id} DELETE action invoked");
 
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
             if(vaccinationCentre is null)
             {
-                return false;
+                throw new NotFoundException("Vaccination centre is not found");
             }
 
             _dbContext.VaccinationCentres.Remove(vaccinationCentre);
             _dbContext.SaveChanges();
-            return true;
         }
 
     }

@@ -25,11 +25,6 @@ namespace VaccinationCentres.Controllers
         public ActionResult<VaccinationCentre> Get([FromRoute]int id)
         {
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
-
-            if(vaccinationCentre is null)
-            {
-                return NotFound();
-            }
             return Ok(vaccinationCentre);
         }
 
@@ -70,14 +65,8 @@ namespace VaccinationCentres.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            var isDeleted = _centreService.Delete(id);
-
-            if(isDeleted)
-            {
-                return NoContent();
-            }
-
-            return NotFound();
+            _centreService.Delete(id);
+            return NoContent();
         }
     }
 }
