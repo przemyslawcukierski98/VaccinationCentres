@@ -36,6 +36,7 @@ namespace VaccinationCentres
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IVaccinationCentreService, VaccinationCentreService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddSwaggerGen();
         }

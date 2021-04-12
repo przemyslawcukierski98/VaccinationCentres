@@ -14,7 +14,7 @@ namespace VaccinationCentres.Models.dto
         [MinLength(8)]
         public string Password { get; set; }
         public string Nationality { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string Role { get; set; } = "Admin";
     }
