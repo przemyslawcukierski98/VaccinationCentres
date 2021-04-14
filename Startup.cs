@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VaccinationCentres.Middleware;
 using VaccinationCentres.Models;
+using VaccinationCentres.Models.Validators;
 using VaccinationCentres.Services;
 
 namespace VaccinationCentres
@@ -34,11 +37,13 @@ namespace VaccinationCentres
             services.AddDbContext<VaccinationCentresContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("VaccinationCentresDatabase")));
             services.AddControllers();
+            services.AddControllers().AddFluentValidation();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IVaccinationCentreService, VaccinationCentreService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IValidator<User>, UserValidator>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddSwaggerGen();
         }

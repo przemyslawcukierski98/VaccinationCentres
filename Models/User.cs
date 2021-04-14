@@ -12,21 +12,16 @@ namespace VaccinationCentres.Models
     public class User
     {
         public int Id { get; set; }
-        [Required]
-        [DisplayName("Adres e-mail")]
         public string Email { get; set; }
-        [Required]
-        [DisplayName("Imię")]
         public string FirstName { get; set; }
-        [Required]
-        [DisplayName("Nazwisko")]
+        public string City { get; set; }
+        public string Street { get; set; }
+        public int HomeNumber { get; set; }
+
+        public string PhoneNumber { get; set; }
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
-        [Required]
-        [DisplayName("Narodowość")]
         public string Nationality { get; set; }
-        [Required]
-        [DisplayName("Rola użytkownika")]
         public string Role { get; set; }
     }
 }
