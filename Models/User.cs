@@ -21,7 +21,6 @@ namespace VaccinationCentres.Models
         [Required]
         [DisplayName("Nazwisko")]
         public string LastName { get; set; }
-
         public string PasswordHash { get; set; }
         [Required]
         [DisplayName("Narodowość")]
