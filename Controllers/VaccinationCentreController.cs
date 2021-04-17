@@ -23,6 +23,7 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin,user")]
         public ActionResult<VaccinationCentre> Get([FromRoute]int id)
         {
             var vaccinationCentre = _dbContext.VaccinationCentres.SingleOrDefault(x => x.Id == id);
@@ -30,7 +31,7 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "admin,user")]
         public ActionResult<VaccinationCentre> GetAll()
         {
             var vaccinationCentres = _centreService.GetAll();
@@ -39,6 +40,7 @@ namespace VaccinationCentres.Controllers
 
         [Route("getAddress/{id}")]
         [HttpGet]
+        [Authorize(Roles = "admin,user")]
         public ActionResult<VaccinationCentre> GetInfoAboutAddress([FromRoute] int id)
         {
             var vaccinationCentreDto = _centreService.GetAddressById(id);
@@ -47,6 +49,7 @@ namespace VaccinationCentres.Controllers
 
         [Route("getVaccinator/{id}")]
         [HttpGet]
+        [Authorize(Roles = "admin,user")]
         public ActionResult<VaccinationCentre> GetInfoAboutVaccinator([FromRoute] int id)
         {
             var vaccinatorDto = _centreService.GetVaccinatorById(id);
@@ -54,6 +57,7 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult CreateVaccinationCentre([FromBody] VaccinationCentre centre)
         {
             if(!ModelState.IsValid)
@@ -65,6 +69,7 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete([FromRoute] int id)
         {
             _centreService.Delete(id);
