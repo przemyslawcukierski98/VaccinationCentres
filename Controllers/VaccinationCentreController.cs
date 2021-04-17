@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace VaccinationCentres.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<VaccinationCentre> GetAll()
         {
             var vaccinationCentres = _centreService.GetAll();
