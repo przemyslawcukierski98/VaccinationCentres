@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VaccinationCentres.Models;
+using VaccinationCentres.Models.dto;
 using VaccinationCentres.Services;
 
 namespace VaccinationCentres.Controllers
@@ -28,6 +29,13 @@ namespace VaccinationCentres.Controllers
             }
             var id = _accountService.RegisterUser(user);
             return Created($"/api/account/register/{id}", null);
+        }
+
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] LoginUserDto dto)
+        {
+            string token = _accountService.GenerateJwt(dto);
+            return Ok(token);
         }
     }
 }
