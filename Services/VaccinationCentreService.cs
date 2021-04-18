@@ -50,11 +50,12 @@ namespace VaccinationCentres.Services
             return vaccinatorDto;
         }
 
-        public IEnumerable<VaccinationCentre> GetAll()
+        public IEnumerable<VaccinationCentre> GetAll(string searchPhrase)
         {
             _logger.LogInformation("View information of all vaccination centers");
 
-            var vaccinationCentres = _dbContext.VaccinationCentres.Where(x => true);
+            var vaccinationCentres = _dbContext.VaccinationCentres.Where(x => searchPhrase == null || (x.City.ToLower().Contains(searchPhrase.ToLower()) 
+            || x.Voivodeship.ToLower().Contains(searchPhrase.ToLower())));
             return vaccinationCentres;
         }
 
