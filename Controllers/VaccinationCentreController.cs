@@ -32,9 +32,9 @@ namespace VaccinationCentres.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin,user")]
-        public ActionResult<VaccinationCentre> GetAll([FromQuery] string searchPhrase)
+        public ActionResult<VaccinationCentre> GetAll([FromQuery] VaccinationCentreQuery query)
         {
-            var vaccinationCentres = _centreService.GetAll(searchPhrase);
+            var vaccinationCentres = _centreService.GetAll(query);
             return Ok(vaccinationCentres);
         }
 

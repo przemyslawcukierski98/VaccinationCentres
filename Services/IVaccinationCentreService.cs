@@ -7,7 +7,7 @@ namespace VaccinationCentres.Services
     {
         int Create(VaccinationCentre vaccinationCentre);
         VaccinationCentreDto GetAddressById(int id);
-        IEnumerable<VaccinationCentre> GetAll(string searchPhrase);
+        IEnumerable<VaccinationCentre> GetAll(VaccinationCentreQuery query);
         VaccinatorDto GetVaccinatorById(int id);
 
         void Delete(int id);

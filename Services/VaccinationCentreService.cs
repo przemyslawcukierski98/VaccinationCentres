@@ -50,12 +50,16 @@ namespace VaccinationCentres.Services
             return vaccinatorDto;
         }
 
-        public IEnumerable<VaccinationCentre> GetAll(string searchPhrase)
+        public IEnumerable<VaccinationCentre> GetAll(VaccinationCentreQuery query)
         {
             _logger.LogInformation("View information of all vaccination centers");
 
-            var vaccinationCentres = _dbContext.VaccinationCentres.Where(x => searchPhrase == null || (x.City.ToLower().Contains(searchPhrase.ToLower()) 
-            || x.Voivodeship.ToLower().Contains(searchPhrase.ToLower())));
+            var vaccinationCentres = _dbContext.VaccinationCentres
+                .Where(x => query.SearchPhrase == null || (x.City.ToLower().Contains(query.SearchPhrase.ToLower())
+            || x.Voivodeship.ToLower().Contains(query.SearchPhrase.ToLower())))
+                .Skip(query.PageSize * query.PageNumber - 1)
+                .Take(query.PageSize);
+
             return vaccinationCentres;
         }
 
