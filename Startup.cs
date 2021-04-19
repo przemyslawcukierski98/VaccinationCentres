@@ -66,6 +66,7 @@ namespace VaccinationCentres
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddScoped<IValidator<User>, UserValidator>();
+            services.AddScoped<IValidator<VaccinationCentreQuery>, VaccinationCentreQueryValidator>();
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddSwaggerGen();
         }
