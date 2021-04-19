@@ -50,17 +50,25 @@ namespace VaccinationCentres.Services
             return vaccinatorDto;
         }
 
-        public IEnumerable<VaccinationCentre> GetAll(VaccinationCentreQuery query)
+        public PagedResult<VaccinationCentre> GetAll(VaccinationCentreQuery query)
         {
             _logger.LogInformation("View information of all vaccination centers");
 
-            var vaccinationCentres = _dbContext.VaccinationCentres
-                .Where(x => query.SearchPhrase == null || (x.City.ToLower().Contains(query.SearchPhrase.ToLower())
-            || x.Voivodeship.ToLower().Contains(query.SearchPhrase.ToLower())))
+            var baseQuery = _dbContext.VaccinationCentres.Where(x => query.SearchPhrase == null
+            || (x.City.ToLower().Contains(query.SearchPhrase.ToLower())
+            || x.Voivodeship.ToLower().Contains(query.SearchPhrase.ToLower())));
+
+            var vaccinationCentres = baseQuery
                 .Skip(query.PageSize * query.PageNumber - 1)
                 .Take(query.PageSize);
 
-            return vaccinationCentres;
+            var totalItemsCount = baseQuery.Count();
+
+            var vaccinationCentresDtos = _mapper.Map<List<VaccinationCentre>>(vaccinationCentres);
+
+            var result = new PagedResult<VaccinationCentre>(vaccinationCentresDtos, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return result;
         }
 
         public int Create(VaccinationCentre vaccinationCentre)
