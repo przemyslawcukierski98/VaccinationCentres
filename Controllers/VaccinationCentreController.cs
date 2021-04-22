@@ -22,6 +22,11 @@ namespace VaccinationCentres.Controllers
             _centreService = centreService;
         }
 
+        public ActionResult Index()
+        {
+            return null;
+        }
+
         [HttpGet("{id}")]
         [Authorize(Roles = "admin,user")]
         public ActionResult<VaccinationCentre> Get([FromRoute]int id)
